@@ -17,5 +17,10 @@ jobs:
     - name: Execute Gradle task
       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-8
       with:
-        args: check
-          
+        args: build
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Archive
+        path: build/libs/actions-test-1.0-SNAPSHOT.jar
+
