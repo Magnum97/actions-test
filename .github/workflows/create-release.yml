@@ -12,7 +12,7 @@ jobs:
 
       - name: Get version
         id: get_version
-        run: echo ::set-output name=VERSION::${{GETHUB_REF/refs\/tags\//}}
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
       - name: Github Release create, update, and upload assets
         uses: meeDamian/github-release@v2.0.1
