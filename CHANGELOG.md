@@ -1,4 +1,8 @@
-## 1.3.1 (2020-06-07)
+## [1.3.2](https://github.com/Magnum97/actions-test/compare/v1.3.1...v1.3.2) (2020-06-07)
+
+
+
+## [1.3.1](https://github.com/Magnum97/actions-test/compare/48949eda3bff8a28581cf4e9acc512bcd50b5d40...v1.3.1) (2020-06-07)
 
 
 ### Reverts
