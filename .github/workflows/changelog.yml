@@ -13,7 +13,7 @@ jobs:
         id: change_log
         uses: TriPSs/conventional-changelog-action@v2
         with:
-          github-token: c91dcd70f372606c61427092930400e1c68b0673
+          github-token: ${{ secrets.github_token }}
 #          git-message: Update Changelog
 #          output-file: false
 
