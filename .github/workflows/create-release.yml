@@ -35,7 +35,7 @@ jobs:
           tag: ${{ steps.get_version.outputs.VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
-          draft: true
+          draft: false
           allow_override: true
           body: |
             Changelog for ${{ steps.get_version.outputs.VERSION }} :
