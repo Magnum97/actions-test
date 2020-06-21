@@ -1,21 +1,41 @@
-name: Generate Changelog
-
-on: [ push ]
+name: Update Changelog
+on:
+  release:
+    type: published
 
 jobs:
-  generate:
+  comment:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Create CHANGELOG.md
-        id: change_log
-        uses: TriPSs/conventional-changelog-action@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
         with:
-          github-token: c91dcd70f372606c61427092930400e1c68b0673
-#          git-message: Update Changelog
-          output-file: false
+          python-version: "3.8"
+      - name: Update version
+        id: version
+        run: |
+          echo "GITHUB_REF is a tag you set for the release"
+          echo "Your GitHub ref: ${GITHUB_REF}"
+          VERSION=`echo "${GITHUB_REF}" | cut -f 3 -d "/"`
+          echo "Preparing version ${VERSION}"
+          echo "__version__ = \"${VERSION}\"" > __version__.py
+          echo "##[set-output name=version;]$(echo ${VERSION})"
+      - uses: vemel/update-changelog@0.0.1
+        id: changelog
+        with:
+          version: ${{ steps.version.outputs.version }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          commit-message: Release ${{ steps.version.outputs.version }}
+          labels: release, bot
+          title: "Release ${{ steps.version.outputs.version }}"
+          body: |
+            # Release ${{ steps.version.outputs.version }}
 
+            Merge this PR to update your version and changelog!
 
+            ## Included Pull Requests
 
+            ${{ steps.changelog.outputs.pulls_list_md }}
