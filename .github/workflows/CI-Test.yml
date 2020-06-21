@@ -22,9 +22,3 @@ jobs:
       - name: Gradle build task
         run: ./gradlew check
 
-#      - name: Upload artifact
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: Archive
-#          path: build/libs/actions-test-1.0-SNAPSHOT.jar
-#
